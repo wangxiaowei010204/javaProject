@@ -9,6 +9,8 @@ import com.example.Service.UserService;
 import com.example.repository.UserMapper;
 import com.github.pagehelper.PageHelper;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service("userService")
@@ -18,6 +20,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+    @Cacheable(value = "user", key= "#userId")
     @Override
     public UserTest getUserById(long userId) {
         return userMapper.selectByPrimaryKey(userId);
@@ -38,4 +41,14 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    
+    @CacheEvict(value = "user", key= "#userId")
+    @Override
+    public UserTest updateUserNickname(long userId, String nickname) {
+
+        userMapper.setNickname(userId,nickname);
+
+        return null;
+    }
+    
 }

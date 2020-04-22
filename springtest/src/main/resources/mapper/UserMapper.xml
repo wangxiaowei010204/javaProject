@@ -38,4 +38,8 @@
     insert into usertest ( nickname,mobile, password) values (#{nickname},#{mobile},#{password})    
    </insert>
 
+   <update id="setNickname" parameterType="usertest">
+    update  usertest set nickname = #{nickname} where  id = #{id,jdbcType=BIGINT}  
+   </update>
+   
 </mapper>

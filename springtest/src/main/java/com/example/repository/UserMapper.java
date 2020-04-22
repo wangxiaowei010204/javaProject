@@ -17,4 +17,7 @@ public interface UserMapper {
 
     //注册用户
     void register(UserTest userTest);
+
+    //修改用户昵称
+    void setNickname(long id,String nickname);
 }
